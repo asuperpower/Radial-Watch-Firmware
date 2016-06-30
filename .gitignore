@@ -27,6 +27,12 @@
 *.x86_64
 *.hex
 
+# Others
+*.pdf
+*.doc
+*.docx
+*.layout
+
 # =========================
 # Operating System Files
 # =========================
@@ -73,3 +79,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+tools/arm-2011.09-69-arm-none-eabi.exe
+*.layout
+Watch.layout

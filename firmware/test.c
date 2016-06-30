@@ -1,7 +1,7 @@
 #include  "common.h"
 
-#define  LED_ON        GPIOC_PSOR=(1<<5)
-#define  LED_OFF    GPIOC_PCOR=(1<<5)
+#define  LED_ON        GPIOC_PSOR=(1<<5)    // PSOR STANDS FOR "PORT SET OUTPUT REGISTER"
+#define  LED_OFF    GPIOC_PCOR=(1<<5)       // PCOR STANDS FOR "PORT CLEAR OUTPUT REGISTER"
 
 
 int  main(void)

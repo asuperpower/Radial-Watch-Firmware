@@ -35,12 +35,20 @@
 		<Unit filename="common/sysinit.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="crt/h/string.h" />
+		<Unit filename="crt/string/memset.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="firmware/arm/pins.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="firmware/test.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="include/MK20D7.h" />
 		<Unit filename="include/arm_cm4.h" />
 		<Unit filename="include/common.h" />
+		<Unit filename="include/firmware/arm/pins.h" />
 		<Unit filename="include/mcg.h" />
 		<Unit filename="include/start.h" />
 		<Unit filename="include/startup.h" />
