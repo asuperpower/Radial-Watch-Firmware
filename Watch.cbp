@@ -35,7 +35,14 @@
 		<Unit filename="common/sysinit.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="common/uart.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="crt/h/stdlib.h" />
 		<Unit filename="crt/h/string.h" />
+		<Unit filename="crt/stdlib/malloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="crt/string/memset.c">
 			<Option compilerVar="CC" />
 		</Unit>

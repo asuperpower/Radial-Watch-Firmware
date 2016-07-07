@@ -43,8 +43,8 @@ Revision History:
     30/6/2016: Initial Revision.
 
 --*/
-//#include <stdlib.h>
-//#include <stdint.h>
+#include <stdlib.h>
+#include <stdint.h>
 
 #define HEAP_START  0x20000000 // 32KiB into SRAM
 #define HEAP_END    0x20008000 // END OF SRAM
@@ -57,10 +57,10 @@ Revision History:
 **/
 typedef struct MEMBLOCK
 {
-    MEMBLOCK*   prev;
-    MEMBLOCK*   next;
-    uint16_t    in_use : 1;
-    uint16_t    size : 15;
+    struct MEMBLOCK*   prev;
+    struct MEMBLOCK*   next;
+    uint16_t            in_use : 1;
+    uint16_t            size : 15;
 } memblock_t;
 
 static void split_block(memblock_t* block, uint16_t size)
@@ -86,7 +86,7 @@ void* malloc(uint16_t size)
     while(current < HEAP_END)
     {
         // We've found a free block that's large enough
-        if(curent->in_use == 0 && current->size >= size)
+        if(current->in_use == 0 && current->size >= size)
         {
             current->in_use = 1; // This block is taken, ladies!
             current->size   = size - sizeof(memblock_t);
@@ -103,21 +103,21 @@ void* malloc(uint16_t size)
         current += current->size;
     }
 
-    return ENOMEN; // If we return this we're in a bit of trouble.. We should probably try and recover...
+    return 0; // If we return this we're in a bit of trouble.. We should probably try and recover...
 }
 
 int free(void* block)
 {
-    memblock_t* block = (memblock_t*)(block - sizeof(memblock_t)); // Get the address of the actual block
-    block->in_use = 0;
+    memblock_t* blockh = (memblock_t*)(block - sizeof(memblock_t)); // Get the address of the actual block
+    blockh->in_use = 0;
 
     // Right block coalesce. Make sure we don't go over usable RAM
-    if(block->next->in_use == 0 && block->next < HEAP_END)
-        block->size += block->next->size;
+    if(blockh->next->in_use == 0 && blockh->next < HEAP_END)
+        blockh->size += blockh->next->size;
 
     // Left block coalesce
-    if(block->prev->in_use ==0 && block->prev > HEAP_START)
-        block->prev->size += block->size; // Add on the size of both blocks
+    if(blockh->prev->in_use ==0 && blockh->prev > HEAP_START)
+        blockh->prev->size += blockh->size; // Add on the size of both blocks
 
 }
 

@@ -1,23 +1,18 @@
 /*+===================================================================
-  File:     string.h
+  File:     stdlib.h
 
-  Summary:  C Standard Library header file
+  Summary:  C Standard Library Functions
 
   Author:   Quaker762
 
   Revision History:
-            29/6/16: Initial Revision
 
 ----------------------------------------------------------------------
   Copyright 2016 Radial Technologies, Pty Ltd
 ===================================================================+*/
-#ifndef STRING_H_INCLUDED
-#define STRING_H_INCLUDED
-
-#include <stddef.h>
-
-void memset(void* ptr, int value, size_t number);
+#ifndef STDLIB_H_INCLUDED
+#define STDLIB_H_INCLUDED
 
 
 
-#endif // STRING_H_INCLUDED
+#endif // STDLIB_H_INCLUDED

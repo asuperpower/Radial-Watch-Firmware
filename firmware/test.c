@@ -4,7 +4,7 @@
 #define  LED_OFF    GPIOC_PCOR=(1<<5)       // PCOR STANDS FOR "PORT CLEAR OUTPUT REGISTER"
 
 
-int  main(void)
+int main(void)
 {
     volatile uint32_t               n;
     uint32_t                        v;

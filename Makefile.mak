@@ -35,13 +35,14 @@ LDFLAGS += -nostartfiles -T$(LSCRIPT) -mthumb -mcpu=$(CPU)
 ASFLAGS += -mcpu=$(CPU)
 
 # Tools
-CC = arm-none-eabi-gcc
-AS = arm-none-eabi-as
-AR = arm-none-eabi-ar
-LD = arm-none-eabi-ld
-OBJCOPY = arm-none-eabi-objcopy
-SIZE = arm-none-eabi-size
-OBJDUMP = arm-none-eabi-objdump
+CC = 		arm-none-eabi-gcc
+AS = 		arm-none-eabi-as
+AR = 		arm-none-eabi-ar
+LD = 		arm-none-eabi-ld
+MAKE = 		mingw32-make.exe
+OBJCOPY = 	arm-none-eabi-objcopy
+SIZE = 		arm-none-eabi-size
+OBJDUMP = 	arm-none-eabi-objdump
 
 RM = rm -rf
 
@@ -53,6 +54,7 @@ OBJ += $(addprefix $(OBJDIR)/,$(notdir $(ASM:.s=.o)))
 
 all:: $(BINDIR)/$(PROJECT).hex
 
+
 Build: $(BINDIR)/$(PROJECT).hex
 
 dump: $(BINDIR)/$(PROJECT).elf
@@ -62,6 +64,7 @@ $(BINDIR)/$(PROJECT).hex: $(BINDIR)/$(PROJECT).elf
 	$(OBJCOPY) -R .stack -O ihex $(BINDIR)/$(PROJECT).elf $(BINDIR)/$(PROJECT).hex
 
 $(BINDIR)/$(PROJECT).elf: $(OBJ)
+	mkdir $(BINDIR)
 	$(CC) $(OBJ) $(LDFLAGS) -o $(BINDIR)/$(PROJECT).elf
 
 
@@ -71,8 +74,12 @@ clean:
 	$(RM) $(BINDIR)
 	$(RM) $(OBJDIR)
 
+libc:
+	cd crt && $(MAKE) all
+
 # Compilation
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c libc
+	mkdir $(OBJDIR)
 	$(CC) $(GCFLAGS) -c $< -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.s
@@ -84,3 +91,4 @@ $(OBJDIR)/%.o: $(COMDIR)/%.c
 
 $(OBJDIR)/%.o: $(COMDIR)/%.s
 	$(AS) $(ASFLAGS) -o $@ $<
+

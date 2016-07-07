@@ -12,6 +12,8 @@
   Copyright 2016 Radial Technologies, Pty Ltd
 ===================================================================+*/
 
+#include <string.h>
+
 /*++
 
 Routine Description:

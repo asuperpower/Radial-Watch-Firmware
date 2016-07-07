@@ -40,6 +40,7 @@ int32_t			periph_clk_khz;
  *  project can consist of just three files; crt0.s, the main project
  *  file, and this file.   8 Apr 14  KEL
  */
+extern int main(void); // No implicit Declaration in THIS dojo!
 void start(void)
 {
 /*
@@ -49,7 +50,7 @@ void start(void)
 	sysinit();			// Perform processor initialization
 	main();				// run the main program
 
-	while (1)   ;		// control should never get here!
+	while (1);		    // control should never get here!
 }
 
 
